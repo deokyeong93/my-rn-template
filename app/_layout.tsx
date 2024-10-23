@@ -11,6 +11,7 @@ import { useColorScheme } from '~/lib/useColorScheme'
 import { PortalHost } from '@rn-primitives/portal'
 import { ThemeToggle } from '~/components/ThemeToggle'
 import { setAndroidNavigationBar } from '~/lib/android-navigation-bar'
+import { useFonts } from 'expo-font'
 
 const LIGHT_THEME: Theme = {
   dark: false,
@@ -32,6 +33,12 @@ SplashScreen.preventAutoHideAsync()
 export default function RootLayout() {
   const { colorScheme, setColorScheme, isDarkColorScheme } = useColorScheme()
   const [isColorSchemeLoaded, setIsColorSchemeLoaded] = React.useState(false)
+
+  useFonts({
+    pretendard: require('../assets/fonts/Pretendard-Regular.ttf'),
+    'pretendard-medium': require('../assets/fonts/Pretendard-Medium.ttf'),
+    'pretendard-bold': require('../assets/fonts/Pretendard-Bold.ttf'),
+  })
 
   React.useEffect(() => {
     ;(async () => {
