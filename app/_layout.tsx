@@ -44,21 +44,26 @@ export default function RootLayout() {
     ;(async () => {
       const theme = await AsyncStorage.getItem('theme')
       if (Platform.OS === 'web') {
-        // Adds the background color to the html element to prevent white background on overscroll.
+        // NOTE: 기본 설정 (Web을 쓸지 모르지만... 오버스크롤 시 색상 다른 부분을 막기 위한 코드)
         document.documentElement.classList.add('bg-background')
       }
+
       if (!theme) {
         AsyncStorage.setItem('theme', colorScheme)
         setIsColorSchemeLoaded(true)
         return
       }
-      const colorTheme = theme === 'dark' ? 'dark' : 'light'
+
+      // NOTE : 일단 기본은 Light 모드
+      const colorTheme = 'light'
+
       if (colorTheme !== colorScheme) {
         setColorScheme(colorTheme)
         setAndroidNavigationBar(colorTheme)
         setIsColorSchemeLoaded(true)
         return
       }
+
       setAndroidNavigationBar(colorTheme)
       setIsColorSchemeLoaded(true)
     })().finally(() => {
